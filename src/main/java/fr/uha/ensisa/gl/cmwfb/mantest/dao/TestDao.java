@@ -13,6 +13,4 @@ public interface TestDao {
 	public Collection<Test> findAll();
 
 	public long count();
-	
-	public Test modify(long id, String newTestName);
 }
