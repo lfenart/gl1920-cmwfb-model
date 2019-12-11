@@ -77,4 +77,11 @@ public class TestTest {
 		assertEquals(result, sut.getResult());
 	}
 	
+	@Test
+	public void getStepIndex() {
+		Step step = new Step();
+		sut.addStep(step);
+		assertEquals(step, sut.getStep(0));
+	}
+	
 }
