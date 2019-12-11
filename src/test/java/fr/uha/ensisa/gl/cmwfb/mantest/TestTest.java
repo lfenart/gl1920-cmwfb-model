@@ -28,44 +28,46 @@ public class TestTest {
 	}
 	
 	@Test
-	public void addAction() {
-		String action1 = "action1";
-		sut.addAction(action1);
-		assertEquals(1, sut.getActions().size());
-		String action2 = "action2";
-		sut.addAction(action2);
-		assertEquals(2, sut.getActions().size());
-		assertEquals(action1, sut.getActions().get(0));
-		assertEquals(action2, sut.getActions().get(1));
+	public void addStep() {
+		Step step1 = new Step();
+		step1.setText("step1");
+		sut.addStep(step1);
+		assertEquals(1, sut.getSteps().size());
+		Step step2 = new Step();
+		step2.setText("step2");
+		sut.addStep(step2);
+		assertEquals(2, sut.getSteps().size());
+		assertEquals(step1, sut.getSteps().get(0));
+		assertEquals(step2, sut.getSteps().get(1));
 	}
 	
 	@Test
-	public void addActionIndex() {
-		String action1 = "action1";
-		sut.addAction(action1);
-		String action2 = "action2";
-		sut.addAction(0, action2);
-		assertEquals(2, sut.getActions().size());
-		assertEquals(action2, sut.getActions().get(0));
-		assertEquals(action1, sut.getActions().get(1));
+	public void addStepIndex() {
+		Step step1 = new Step();
+		sut.addStep(step1);
+		Step step2 = new Step();
+		sut.addStep(0, step2);
+		assertEquals(2, sut.getSteps().size());
+		assertEquals(step2, sut.getSteps().get(0));
+		assertEquals(step1, sut.getSteps().get(1));
 	}
 	
 	@Test(expected = IndexOutOfBoundsException.class)
-	public void addActionOutOfBounds() {
-		String action = "action";
-		sut.addAction(1, action);
+	public void addStepOutOfBounds() {
+		Step step = new Step();
+		sut.addStep(1, step);
 	}
 	
 	@Test
-	public void removeAction() {
-		String action1 = "action1";
-		sut.addAction(action1);
-		String action2 = "action2";
-		sut.addAction(action2);
-		assertEquals(2, sut.getActions().size());
-		sut.removeAction(0);
-		assertEquals(1, sut.getActions().size());
-		assertEquals(action2, sut.getActions().get(0));
+	public void removeStep() {
+		Step step1 = new Step();
+		sut.addStep(step1);
+		Step step2 = new Step();
+		sut.addStep(step2);
+		assertEquals(2, sut.getSteps().size());
+		sut.removeStep(0);
+		assertEquals(1, sut.getSteps().size());
+		assertEquals(step2, sut.getSteps().get(0));
 	}
 	
 	@Test
