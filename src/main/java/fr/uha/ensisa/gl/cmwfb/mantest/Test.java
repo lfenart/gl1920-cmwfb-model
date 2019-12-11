@@ -7,11 +7,11 @@ public class Test {
 
 	private long id;
 	private String name;
-	private List<String> actions;
+	private List<Step> steps;
 	private String result;
 	
 	public Test() {
-		this.actions = new ArrayList<String>();
+		this.steps = new ArrayList<Step>();
 		this.result = "";
 	}
 
@@ -31,20 +31,20 @@ public class Test {
 		this.name = name;
 	}
 	
-	public List<String> getActions() {
-		return this.actions;
+	public List<Step> getSteps() {
+		return this.steps;
 	}
 	
-	public void addAction(String action) {
-		this.actions.add(action);
+	public void addStep(Step step) {
+		this.steps.add(step);
 	}
 	
-	public void addAction(int index, String action) {
-		this.actions.add(index, action);
+	public void addStep(int index, Step step) {
+		this.steps.add(index, step);
 	}
 	
-	public void removeAction(int index) {
-		this.actions.remove(index);
+	public void removeStep(int index) {
+		this.steps.remove(index);
 	}
 	
 	public String getResult() {
