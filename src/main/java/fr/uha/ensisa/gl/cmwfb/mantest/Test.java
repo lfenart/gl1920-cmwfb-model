@@ -35,6 +35,10 @@ public class Test {
 		return this.steps;
 	}
 	
+	public Step getStep(int index) {
+		return this.steps.get(index);
+	}
+	
 	public void addStep(Step step) {
 		this.steps.add(step);
 	}
