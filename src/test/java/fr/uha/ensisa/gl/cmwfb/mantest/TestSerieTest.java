@@ -71,4 +71,5 @@ public class TestSerieTest {
 		assertEquals(this.sut.getTestSeries().length, 1);
 		assertEquals(this.sut.getTestSeries()[0], testSerie);
 	}
+	
 }
