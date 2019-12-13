@@ -1,6 +1,7 @@
 package fr.uha.ensisa.gl.cmwfb.mantest;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.util.Calendar;
 
@@ -48,6 +49,24 @@ public class TestReportTest {
 		assertEquals(stepReport.getStep(),stepReport2.getStep());
 		assertEquals(result,stepReport.isSuccess());
 		assertEquals(commentaire,stepReport.getComment());	
+	}
+	
+	@Test
+	public void Test6() {
+		Step step = new Step();
+		test.addStep(step);
+		boolean result = true;
+		String commentaire = "";
+		StepReport stepReport = new StepReport(step,result,commentaire);
+		sut.addNextStepStepReport(0,result,commentaire);
+		Step step2 = new Step();
+		test.addStep(step2);
+		boolean result2 = true;
+		String commentaire2 = "";
+		StepReport stepReport2 = new StepReport(step2,result2,commentaire2);
+		sut.addNextStepStepReport(1,result2,commentaire2);
+		assertNotNull(sut.compare(stepReport, stepReport2));
+		
 	}
 		
 	}
