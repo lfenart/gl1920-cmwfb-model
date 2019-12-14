@@ -9,8 +9,8 @@ public interface TestReportDao {
 	public TestReport find(long id);
 	
 	//Créer dans la DAO un rapport de test pour le test demandé et le retourne
-	public TestReport create(long id, Test t);
+	public TestReport create(Test t);
 	
-	public long count();
+	//public long getNextId();
 
 }

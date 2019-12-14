@@ -55,7 +55,7 @@ public class TestTest {
 	@Test(expected = IndexOutOfBoundsException.class)
 	public void addStepOutOfBounds() {
 		Step step = new Step();
-		sut.addStep(step);
+		sut.addStep(1,step);
 	}
 	
 	@Test

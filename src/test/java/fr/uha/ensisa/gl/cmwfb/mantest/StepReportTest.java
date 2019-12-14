@@ -33,4 +33,19 @@ public class StepReportTest {
 		String c ="";
 		assertEquals(c,sut.getComment());
 	}
+	
+	@Test
+	public void Test4() {
+		Step s = new Step();
+		boolean result = true;
+		String comment = "";
+		StepReport stp = new StepReport(s,result,comment);
+		sut.setStep(s);
+		sut.setComment(comment);
+		sut.setSuccess(result);
+		assertEquals(stp.getStep(),sut.getStep());
+		assertEquals(stp.isSuccess(),sut.isSuccess());
+		assertEquals(stp.getComment(),sut.getComment());
+		
+	}
 }

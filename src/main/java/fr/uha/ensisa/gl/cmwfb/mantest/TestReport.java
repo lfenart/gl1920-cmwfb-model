@@ -1,5 +1,6 @@
 package fr.uha.ensisa.gl.cmwfb.mantest;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Comparator;
@@ -12,13 +13,13 @@ public class TestReport implements Comparator<StepReport> {
 
 	private final long id;
 	private final Test test;
-	private final Map<Step, StepReport> steps;
+	private final	List<StepReport> stepReports;
 	private Calendar calendar = null;
 	
 	public TestReport(long id, Test test) {
 		this.id = id;
 		this.test = test;
-		this.steps = new HashMap<Step, StepReport>();
+		this.stepReports = new ArrayList<StepReport>();
 	}
 	
 	public long getId() {
@@ -33,18 +34,27 @@ public class TestReport implements Comparator<StepReport> {
 		return this.test;
 	}
 	
-
+	public StepReport getStepReport(int stepId) {
+		if(test.getStep(stepId)==null)
+			return null;
+		StepReport stepResult=null;
+		for(StepReport stepReport : this.stepReports) {
+			if(stepReport.getStep()==this.test.getStep(stepId)) {
+				stepResult = stepReport;
+			}
+		}
+		return stepResult;
+	}
+	
 	public void addNextStepStepReport(int stepId, boolean result, String comment) {
 		Step s = this.test.getStep(stepId);
-		this.steps.put(s,new StepReport(s,result,comment));
+		this.stepReports.add(new StepReport(s,result,comment));
 	}
 	
 
 	//retourner la liste des StepsReports, classés par ordre des Steps
-	public StepReport[] getStepReports() {
-		StepReport[] ret = this.steps.values().toArray(new StepReport[0]);
-		Arrays.sort(ret, this);
-		return ret;
+	public List<StepReport> getStepReports() {
+		return this.stepReports;
 	}
 
 	@Override
