@@ -55,7 +55,7 @@ public class TestTest {
 	@Test(expected = IndexOutOfBoundsException.class)
 	public void addStepOutOfBounds() {
 		Step step = new Step();
-		sut.addStep(1, step);
+		sut.addStep(1,step);
 	}
 	
 	@Test
@@ -78,10 +78,18 @@ public class TestTest {
 	}
 	
 	@Test
-	public void getStepIndex() {
-		Step step = new Step();
-		sut.addStep(step);
-		assertEquals(step, sut.getStep(0));
+	public void getStep() {
+		Step s = new Step();
+		sut.addStep(s);
+		assertEquals(s,sut.getStep(0));
 	}
 	
+	@Test 
+	public void getNumberOfSteps() {
+		int id = 0;
+		Step s = new Step();
+		sut.addStep(s);
+		assertEquals(id, sut.getStepId(s));
+		assertEquals(1, sut.getNumberOfSteps());
+	}	
 }
