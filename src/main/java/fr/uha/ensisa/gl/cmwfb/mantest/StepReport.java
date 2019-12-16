@@ -2,12 +2,12 @@ package fr.uha.ensisa.gl.cmwfb.mantest;
 
 public class StepReport {
 	private Step step;
-	private boolean success;
+	private String result;
 	private String comment;
 	
-	public StepReport(Step step, boolean success, String comment) {
+	public StepReport(Step step, String success, String comment) {
 		this.step = step;
-		this.success = success;
+		this.result = success;
 		this.comment = comment;
 	}
 
@@ -19,12 +19,12 @@ public class StepReport {
 		this.step = step;
 	}
 	
-	public boolean isSuccess() {
-		return this.success;
+	public String getResult() {
+		return this.result;
 	}
 	
-	public void setSuccess(boolean success){
-		this.success=success;
+	public void setResult(String success){
+		this.result=success;
 	}
 	
 	public String getComment() {

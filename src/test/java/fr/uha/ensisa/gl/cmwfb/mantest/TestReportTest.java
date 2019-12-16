@@ -41,13 +41,13 @@ public class TestReportTest {
 	public void Test5() {
 		Step step = new Step();
 		test.addStep(step);
-		boolean result = true;
+		String result = "true";
 		String commentaire = "";
 		StepReport stepReport = new StepReport(step,result,commentaire);
 		sut.addNextStepStepReport(0,result,commentaire);
 		StepReport stepReport2 = sut.getStepReports().get(0);
 		assertEquals(stepReport.getStep(),stepReport2.getStep());
-		assertEquals(result,stepReport.isSuccess());
+		assertEquals(result,stepReport.getResult());
 		assertEquals(commentaire,stepReport.getComment());	
 	}
 	
@@ -55,30 +55,19 @@ public class TestReportTest {
 	public void Test6() {
 		Step step = new Step();
 		test.addStep(step);
-		boolean result = true;
+		String result = "true";
 		String commentaire = "";
 		StepReport stepReport = new StepReport(step,result,commentaire);
 		sut.addNextStepStepReport(0,result,commentaire);
 		Step step2 = new Step();
 		test.addStep(step2);
-		boolean result2 = true;
+		String result2 = "true";
 		String commentaire2 = "";
 		StepReport stepReport2 = new StepReport(step2,result2,commentaire2);
 		sut.addNextStepStepReport(1,result2,commentaire2);
 		assertNotNull(sut.compare(stepReport, stepReport2));
 		assertNotNull(sut.getStepReport(0));
 	}
-	
-	@Test
-	public void Test7() {
-		Step step = null;
-		test.addStep(step);
-		boolean result = true;
-		String commentaire = "";
-		StepReport stepReport = new StepReport(step,result,commentaire);
-		sut.addNextStepStepReport(0,result,commentaire);
-		assertEquals(null,sut.getStepReport(0));
-	}
-	
+		
 		
 	}

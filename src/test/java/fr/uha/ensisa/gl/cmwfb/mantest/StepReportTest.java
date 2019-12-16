@@ -11,41 +11,31 @@ public class StepReportTest {
 	@Before
 	public void createStepReport() {
 		Step s = new Step();
-		sut = new fr.uha.ensisa.gl.cmwfb.mantest.StepReport(s,true,"");
+		sut = new fr.uha.ensisa.gl.cmwfb.mantest.StepReport(s,"","");
 	}
 	
 	@Test
-	public void Test1() {
+	public void getsetStep() {
 		Step s = new Step();
-		sut = new StepReport(s,true,"");
+		sut.setStep(s);
 		assertEquals(s,sut.getStep());
 	}
 	
 	@Test
-	public void Test2() {
-		boolean suc = true;
-		assertEquals(suc,sut.isSuccess());
+	public void getsetResult() {
+		String suc = "true";
+		sut.setResult("true");
+		assertEquals(suc,sut.getResult());
 		
 	}
 
 	@Test
-	public void Test3() {
-		String c ="";
+	public void getsetComment() {
+		String c = "s";
+		sut.setComment("s");
 		assertEquals(c,sut.getComment());
 	}
 	
-	@Test
-	public void Test4() {
-		Step s = new Step();
-		boolean result = true;
-		String comment = "";
-		StepReport stp = new StepReport(s,result,comment);
-		sut.setStep(s);
-		sut.setComment(comment);
-		sut.setSuccess(result);
-		assertEquals(stp.getStep(),sut.getStep());
-		assertEquals(stp.isSuccess(),sut.isSuccess());
-		assertEquals(stp.getComment(),sut.getComment());
-		
-	}
+	
+
 }

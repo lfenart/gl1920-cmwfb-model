@@ -35,18 +35,11 @@ public class TestReport implements Comparator<StepReport> {
 	}
 	
 	public StepReport getStepReport(int stepId) {
-		if(test.getStep(stepId)==null)
-			return null;
-		StepReport stepResult=null;
-		for(StepReport stepReport : this.stepReports) {
-			if(stepReport.getStep()==this.test.getStep(stepId)) {
-				stepResult = stepReport;
-			}
-		}
-		return stepResult;
+		if (stepId >= this.stepReports.size() ) return null; 
+		return this.stepReports.get(stepId);
 	}
 	
-	public void addNextStepStepReport(int stepId, boolean result, String comment) {
+	public void addNextStepStepReport(int stepId, String result, String comment) {
 		Step s = this.test.getStep(stepId);
 		this.stepReports.add(new StepReport(s,result,comment));
 	}
@@ -62,57 +55,3 @@ public class TestReport implements Comparator<StepReport> {
 		return test.getStepId(o2.getStep()) - test.getStepId(o1.getStep());
 	}
 }
-	//retourner la prochaine étape à effectuer
-/*	public Step getNextStep() {
-		if(this.isFinished())
-			return null;
-		
-		Step st = null;
-		for(Step s : this.test.getSteps()) {
-			if(! this.steps.containsKey(s)) {
-				st = s;
-				break;
-			}
-		}
-		return st;
-	}
-	
-	/**
-	 * Effectue l'étape à effectuer
-	 * @param result
-	 * @param commentaire
-	 */
-	/*/public void next(boolean result, String comment) {
-		Step s = this.getNextStep();
-		this.steps.put(s, new StepReport(s, result, comment));
-		if(!result || this.steps.size() == this.getTest().getNumberOfSteps()) {
-			this.calendar = Calendar.getInstance();
-		}
-	}
-	
-	/**
-	 * Retourne si le Rapport est complet
-	 * @return
-	 */
-/*	public boolean isFinished() {
-		return this.calendar != null;
-	}
-	
-	/**
-	 * Retourne si le Rapport a été effectué avec succès, null s'il n'est pas encore terminé
-	 * @return
-	 */
-/*	public Boolean isSuccess() {
-		if(!this.isFinished()) return null;
-		
-		for(Step s : this.steps.keySet()) {
-			if(! this.steps.get(s).isSuccess())
-				return false;
-		}
-		
-		return true;
-	}
-	
-	
-	
-}*/

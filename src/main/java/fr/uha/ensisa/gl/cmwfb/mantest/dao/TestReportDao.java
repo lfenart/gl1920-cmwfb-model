@@ -11,6 +11,8 @@ public interface TestReportDao {
 	//Créer dans la DAO un rapport de test pour le test demandé et le retourne
 	public TestReport create(Test t);
 	
+	public void remove(TestReport testReport);
 	//public long getNextId();
 
+	public long count() ;
 }
