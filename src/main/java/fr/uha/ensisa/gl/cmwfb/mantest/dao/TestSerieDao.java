@@ -7,4 +7,6 @@ public interface TestSerieDao {
 	public void persist(TestSerie test);
 	public TestSerie create(String nom);
 	public TestSerie[] findAll();
+	public void delete(TestSerie test);
+	
 }
