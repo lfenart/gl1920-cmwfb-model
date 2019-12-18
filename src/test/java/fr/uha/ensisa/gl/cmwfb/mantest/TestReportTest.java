@@ -3,8 +3,11 @@ package fr.uha.ensisa.gl.cmwfb.mantest;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -27,19 +30,19 @@ public class TestReportTest {
 	}
 	
 	@Test
-	public void Test2() {
+	public void getCalendar() {
 		Calendar c = null;
 		assertEquals(c,sut.getCalendar());
 	}
 	
 	@Test
-	public void Test4() {
+	public void getId() {
 		long i = 0;
 		assertEquals(i, sut.getId());
 	}
 	
 	@Test
-	public void Test5() {
+	public void addNextStepStepReport() {
 		Step step = new Step();
 		test.addStep(step);
 		boolean result = true;
@@ -66,16 +69,61 @@ public class TestReportTest {
 		String commentaire2 = "";
 		StepReport stepReport2 = new StepReport(step2,result2,commentaire2);
 		sut.addNextStepStepReport(1,result2,commentaire2);
-		assertNotNull(sut.compare(stepReport, stepReport2));
 		assertNotNull(sut.getStepReport(0));
 	}
 		
 	@Test
-	public void Test7() {
+	public void getStepReport() {
 		int stepId = 2;
 		test.addStep(new Step());
 		sut.addNextStepStepReport(0,false,"");
 		assertEquals(null,sut.getStepReport(stepId));
 	}
-		
+	
+	@Test
+	public void isFinished() { 
+		Calendar calendar = new GregorianCalendar(2013,0,31); 
+		sut.setCalendar(calendar);
+		assertEquals(true,sut.isFinished());
+		assertNull(sut.getNextStep());
+		sut.setCalendar(null);
+		assertEquals(false,sut.isFinished());
+	}	
+	
+	@Test
+	public void getNextStep() { 
+		Step s = new Step();
+		Step s2 = new Step();
+		assertNull(sut.getNextStep());
+		test.addStep(s);
+		assertEquals(s,sut.getNextStep());
+		sut.addNextStepStepReport(test.getStepId(s), false, "");
+		test.addStep(s2);
+		assertEquals(s2,sut.getNextStep());
+		sut.addNextStepStepReport(test.getStepId(s2), false, "");
+		assertNull(sut.getNextStep());	
 	}
+	
+	
+	@Test
+	public void next() {
+		Step s = new Step();
+		test.addStep(s);
+		sut.next(false,"");
+		assertNotNull(sut.getCalendar());
+		assertEquals(false,sut.isSuccess());
+	}
+	
+	@Test
+	public void isSuccess() {
+		Step s = new Step();
+		Step s2 = new Step();
+		test.addStep(s);
+		test.addStep(s2);
+		sut.next(true,"");
+		assertNull(sut.isSuccess());
+		sut.next(true,"");
+		assertEquals(true,sut.isSuccess());
+	}
+	
+}

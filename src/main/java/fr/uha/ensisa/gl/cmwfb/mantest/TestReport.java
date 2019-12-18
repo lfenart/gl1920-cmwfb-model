@@ -1,15 +1,13 @@
 package fr.uha.ensisa.gl.cmwfb.mantest;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
-import java.util.ListIterator;
-import java.util.Map;
 
-public class TestReport implements Comparator<StepReport> {
+import fr.uha.ensisa.gl.cmwfb.mantest.Step;
+import fr.uha.ensisa.gl.cmwfb.mantest.StepReport;
+
+public class TestReport {
 
 	private final long id;
 	private final Test test;
@@ -28,6 +26,10 @@ public class TestReport implements Comparator<StepReport> {
 	
 	public Calendar getCalendar() {
 		return this.calendar;
+	}
+	
+	public void setCalendar(Calendar c) {
+		this.calendar=c;
 	}
 	
 	public Test getTest() {
@@ -49,9 +51,53 @@ public class TestReport implements Comparator<StepReport> {
 	public List<StepReport> getStepReports() {
 		return this.stepReports;
 	}
-
-	@Override
-	public int compare(StepReport o1, StepReport o2) {
-		return test.getStepId(o2.getStep()) - test.getStepId(o1.getStep());
+	
+	public boolean isFinished() {
+		return this.calendar != null;
 	}
+	
+	public Step getNextStep() {
+		if(this.isFinished())
+			return null;
+		int i=0;
+		Step st = null;
+		for(Step s : this.test.getSteps()) {
+			st =s;
+			
+			while( i<this.stepReports.size()) {
+				if( s != this.stepReports.get(i).getStep()) {
+					st = s;
+					break;
+				}
+				i++;
+			}
+		}
+		if (this.test.getNumberOfSteps()==i) st = null;
+		return st;
+	}
+	
+	
+	public void next(boolean result, String commentaire) {
+		Step s = this.getNextStep();
+		this.addNextStepStepReport(this.test.getStepId(s),result,commentaire);
+		if(!result || this.stepReports.size() == this.getTest().getNumberOfSteps()) {
+			this.calendar = Calendar.getInstance();
+		}
+	}
+	
+	public Boolean isSuccess() {
+		if(!this.isFinished()) return null;
+		
+		for(int i=0; i<this.stepReports.size();i++) {
+			for(Step s : this.test.getSteps()) {
+				if(s==this.stepReports.get(i).getStep()) {
+					if(! this.stepReports.get(i).getSuccess()) {
+						return false;
+					}
+				}	
+			}
+		}		
+		return true;
+	}
+
 }
