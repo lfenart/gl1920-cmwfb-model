@@ -39,9 +39,9 @@ public class TestReport implements Comparator<StepReport> {
 		return this.stepReports.get(stepId);
 	}
 	
-	public void addNextStepStepReport(int stepId, String result, String comment) {
+	public void addNextStepStepReport(int stepId, boolean success, String comment) {
 		Step s = this.test.getStep(stepId);
-		this.stepReports.add(new StepReport(s,result,comment));
+		this.stepReports.add(new StepReport(s,success,comment));
 	}
 	
 
