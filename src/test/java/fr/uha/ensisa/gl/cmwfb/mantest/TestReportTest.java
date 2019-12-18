@@ -1,6 +1,7 @@
 package fr.uha.ensisa.gl.cmwfb.mantest;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 
 import java.util.Calendar;
@@ -69,5 +70,12 @@ public class TestReportTest {
 		assertNotNull(sut.getStepReport(0));
 	}
 		
+	@Test
+	public void Test7() {
+		int stepId = 2;
+		test.addStep(new Step());
+		sut.addNextStepStepReport(0,"","");
+		assertEquals(null,sut.getStepReport(stepId));
+	}
 		
 	}
