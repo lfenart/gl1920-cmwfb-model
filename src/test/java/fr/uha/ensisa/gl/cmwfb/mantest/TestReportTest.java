@@ -25,7 +25,7 @@ public class TestReportTest {
 	}
 	
 	@Test
-	public void Test1() {
+	public void getTest() {
 		assertEquals(test, sut.getTest());
 	}
 	
@@ -42,44 +42,18 @@ public class TestReportTest {
 	}
 	
 	@Test
-	public void addNextStepStepReport() {
+
+	public void getStepReport() {
 		Step step = new Step();
 		test.addStep(step);
 		boolean result = true;
 		String commentaire = "";
-		StepReport stepReport = new StepReport(step,result,commentaire);
-		sut.addNextStepStepReport(0,result,commentaire);
-		StepReport stepReport2 = sut.getStepReports().get(0);
-		assertEquals(stepReport.getStep(),stepReport2.getStep());
-		assertEquals(result,stepReport.getSuccess());
-		assertEquals(commentaire,stepReport.getComment());	
-	}
-	
-	@Test
-	public void Test6() {
-		Step step = new Step();
-		test.addStep(step);
-		boolean result = true;
-		String commentaire = "";
-		StepReport stepReport = new StepReport(step,result,commentaire);
-		sut.addNextStepStepReport(0,result,commentaire);
-		Step step2 = new Step();
-		test.addStep(step2);
-		boolean result2 = true;
-		String commentaire2 = "";
-		StepReport stepReport2 = new StepReport(step2,result2,commentaire2);
-		sut.addNextStepStepReport(1,result2,commentaire2);
+		assertNull(sut.getStepReport(1));
+		sut.next(result,commentaire);
 		assertNotNull(sut.getStepReport(0));
+		assertEquals(sut.getStepReports().size(),test.getNumberOfSteps());
 	}
 		
-	@Test
-	public void getStepReport() {
-		int stepId = 2;
-		test.addStep(new Step());
-		sut.addNextStepStepReport(0,false,"");
-		assertEquals(null,sut.getStepReport(stepId));
-	}
-	
 	@Test
 	public void isFinished() { 
 		Calendar calendar = new GregorianCalendar(2013,0,31); 
@@ -94,14 +68,14 @@ public class TestReportTest {
 	public void getNextStep() { 
 		Step s = new Step();
 		Step s2 = new Step();
+		Step s3 = new Step();
 		assertNull(sut.getNextStep());
 		test.addStep(s);
-		assertEquals(s,sut.getNextStep());
-		sut.addNextStepStepReport(test.getStepId(s), false, "");
 		test.addStep(s2);
+		assertEquals(s,sut.getNextStep());
+		sut.next(true, "");
 		assertEquals(s2,sut.getNextStep());
-		sut.addNextStepStepReport(test.getStepId(s2), false, "");
-		assertNull(sut.getNextStep());	
+		sut.next(true, "");
 	}
 	
 	

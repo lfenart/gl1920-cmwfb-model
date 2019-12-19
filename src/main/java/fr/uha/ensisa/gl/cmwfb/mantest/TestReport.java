@@ -40,12 +40,6 @@ public class TestReport {
 		if (stepId >= this.stepReports.size() ) return null; 
 		return this.stepReports.get(stepId);
 	}
-	
-	public void addNextStepStepReport(int stepId, boolean success, String comment) {
-		Step s = this.test.getStep(stepId);
-		this.stepReports.add(new StepReport(s,success,comment));
-	}
-	
 
 	//retourner la liste des StepsReports, classés par ordre des Steps
 	public List<StepReport> getStepReports() {
@@ -57,30 +51,36 @@ public class TestReport {
 	}
 	
 	public Step getNextStep() {
-		if(this.isFinished())
+		if(this.isFinished() )
 			return null;
-		int i=0;
+		
 		Step st = null;
-		for(Step s : this.test.getSteps()) {
-			st =s;
-			
-			while( i<this.stepReports.size()) {
-				if( s != this.stepReports.get(i).getStep()) {
-					st = s;
-					break;
-				}
-				i++;
+		for(Step s : this.test.getSteps()) {			
+			if(! this.containsStep(s)) {
+				st=s;
+				break;	
 			}
 		}
-		if (this.test.getNumberOfSteps()==i) st = null;
 		return st;
 	}
 	
+	public boolean containsStep(Step step) {
+		boolean result = false;
+		
+		for(int i=0;i<this.stepReports.size();i++) {
+			if( step == this.stepReports.get(i).getStep()) {
+				result=true;
+			}
+		}
+		
+		return result;
+	}
 	
-	public void next(boolean result, String commentaire) {
+	
+	public void next(boolean success, String comment) {
 		Step s = this.getNextStep();
-		this.addNextStepStepReport(this.test.getStepId(s),result,commentaire);
-		if(!result || this.stepReports.size() == this.getTest().getNumberOfSteps()) {
+		this.stepReports.add(new StepReport(s,success,comment));
+		if(!success || this.stepReports.size() == this.getTest().getNumberOfSteps()) {
 			this.calendar = Calendar.getInstance();
 		}
 	}
