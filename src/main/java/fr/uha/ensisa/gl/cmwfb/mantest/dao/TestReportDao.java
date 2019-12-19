@@ -1,5 +1,8 @@
 package fr.uha.ensisa.gl.cmwfb.mantest.dao;
 
+import java.util.Collection;
+import java.util.Map;
+
 import fr.uha.ensisa.gl.cmwfb.mantest.Test;
 import fr.uha.ensisa.gl.cmwfb.mantest.TestReport;
 
@@ -15,4 +18,6 @@ public interface TestReportDao {
 	//public long getNextId();
 
 	public long count() ;
+
+	public Map<Long, TestReport> findAll();
 }

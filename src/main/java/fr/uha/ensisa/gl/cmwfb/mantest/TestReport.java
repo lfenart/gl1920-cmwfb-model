@@ -1,15 +1,13 @@
 package fr.uha.ensisa.gl.cmwfb.mantest;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
-import java.util.ListIterator;
-import java.util.Map;
 
-public class TestReport implements Comparator<StepReport> {
+import fr.uha.ensisa.gl.cmwfb.mantest.Step;
+import fr.uha.ensisa.gl.cmwfb.mantest.StepReport;
+
+public class TestReport {
 
 	private final long id;
 	private final Test test;
@@ -30,6 +28,10 @@ public class TestReport implements Comparator<StepReport> {
 		return this.calendar;
 	}
 	
+	public void setCalendar(Calendar c) {
+		this.calendar=c;
+	}
+	
 	public Test getTest() {
 		return this.test;
 	}
@@ -38,20 +40,64 @@ public class TestReport implements Comparator<StepReport> {
 		if (stepId >= this.stepReports.size() ) return null; 
 		return this.stepReports.get(stepId);
 	}
-	
-	public void addNextStepStepReport(int stepId, boolean success, String comment) {
-		Step s = this.test.getStep(stepId);
-		this.stepReports.add(new StepReport(s,success,comment));
-	}
-	
 
 	//retourner la liste des StepsReports, classés par ordre des Steps
 	public List<StepReport> getStepReports() {
 		return this.stepReports;
 	}
-
-	@Override
-	public int compare(StepReport o1, StepReport o2) {
-		return test.getStepId(o2.getStep()) - test.getStepId(o1.getStep());
+	
+	public boolean isFinished() {
+		return this.calendar != null;
 	}
+	
+	public Step getNextStep() {
+		if(this.isFinished() )
+			return null;
+		
+		Step st = null;
+		for(Step s : this.test.getSteps()) {			
+			if(! this.containsStep(s)) {
+				st=s;
+				break;	
+			}
+		}
+		return st;
+	}
+	
+	public boolean containsStep(Step step) {
+		boolean result = false;
+		
+		for(int i=0;i<this.stepReports.size();i++) {
+			if( step == this.stepReports.get(i).getStep()) {
+				result=true;
+			}
+		}
+		
+		return result;
+	}
+	
+	
+	public void next(boolean success, String comment) {
+		Step s = this.getNextStep();
+		this.stepReports.add(new StepReport(s,success,comment));
+		if(!success || this.stepReports.size() == this.getTest().getNumberOfSteps()) {
+			this.calendar = Calendar.getInstance();
+		}
+	}
+	
+	public Boolean isSuccess() {
+		if(!this.isFinished()) return null;
+		
+		for(int i=0; i<this.stepReports.size();i++) {
+			for(Step s : this.test.getSteps()) {
+				if(s==this.stepReports.get(i).getStep()) {
+					if(! this.stepReports.get(i).getSuccess()) {
+						return false;
+					}
+				}	
+			}
+		}		
+		return true;
+	}
+
 }
