@@ -83,5 +83,9 @@ public class TestBook {
 	public int getNumberOfTestSeries() {
 		return this.testSeries.size();
 	}	
+	
+	public Test getTest2(int testId) {
+		return this.tests.get(testId);
+	}
 
 }
