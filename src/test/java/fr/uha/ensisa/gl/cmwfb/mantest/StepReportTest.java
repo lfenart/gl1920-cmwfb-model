@@ -11,7 +11,7 @@ public class StepReportTest {
 	@Before
 	public void createStepReport() {
 		Step s = new Step();
-		sut = new fr.uha.ensisa.gl.cmwfb.mantest.StepReport(s,"","");
+		sut = new fr.uha.ensisa.gl.cmwfb.mantest.StepReport(s,false,"");
 	}
 	
 	@Test
@@ -22,10 +22,10 @@ public class StepReportTest {
 	}
 	
 	@Test
-	public void getsetResult() {
-		String suc = "true";
-		sut.setResult("true");
-		assertEquals(suc,sut.getResult());
+	public void setSuccess() {
+		boolean suc = true;
+		sut.setSuccess(true);
+		assertEquals(suc,sut.getSuccess());
 		
 	}
 

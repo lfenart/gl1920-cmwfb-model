@@ -18,6 +18,12 @@ public class StepTest {
 		String msg = "toto";
 		sut.setText(msg);
 		assertEquals(msg,sut.getText());
-		
+	}
+	
+	@Test
+	public void setName() {
+		String msg = "toto";
+		sut.setName(msg);
+		assertEquals(msg,sut.getName());
 	}
 }
