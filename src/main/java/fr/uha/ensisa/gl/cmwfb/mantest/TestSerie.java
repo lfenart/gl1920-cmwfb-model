@@ -58,5 +58,12 @@ public class TestSerie {
 		if(!this.testSeries.contains(testSerie))
 			this.testSeries.add(testSerie);
 	}
-
+	
+	public void removeSerie(TestSerie testSerie) {
+		this.testSeries.remove(testSerie);
+	}
+	
+	public void remove(Test test) {
+		this.tests.remove(test);
+	}
 }
