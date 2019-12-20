@@ -3,6 +3,8 @@ package fr.uha.ensisa.gl.cmwfb.mantest;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.uha.ensisa.gl.cmwfb.mantest.Step;
+
 public class Test {
 
 	private long id;
@@ -51,6 +53,10 @@ public class Test {
 		this.steps.remove(index);
 	}
 	
+	public int getStepId(Step step) {
+		return this.steps.indexOf(step);
+	}
+	
 	public String getResult() {
 		return this.result;
 	}
@@ -58,5 +64,8 @@ public class Test {
 	public void setResult(String result) {
 		this.result = result;
 	}
-
+	
+	public int getNumberOfSteps() {
+		return this.steps.size();
+	}
 }

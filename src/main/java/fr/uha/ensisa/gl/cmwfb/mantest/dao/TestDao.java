@@ -14,7 +14,4 @@ public interface TestDao {
 
 	public long count();
 	
-	public Test modifyName(long testId, String newTestName);
-	
-	public Test modifyStep(long testId, int stepId, String newStep);
 }

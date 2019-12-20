@@ -72,4 +72,20 @@ public class TestSerieTest {
 		assertEquals(this.sut.getTestSeries()[0], testSerie);
 	}
 	
+	@Test
+	public void remove() {
+		fr.uha.ensisa.gl.cmwfb.mantest.Test test = mock(fr.uha.ensisa.gl.cmwfb.mantest.Test.class);
+		this.sut.add(test);
+		this.sut.remove(test);
+		assertEquals(0,this.sut.getTests().length);
+	}
+	
+	@Test
+	public void removeSerie() {
+		fr.uha.ensisa.gl.cmwfb.mantest.TestSerie test = mock(fr.uha.ensisa.gl.cmwfb.mantest.TestSerie.class);
+		this.sut.add(test);
+		this.sut.removeSerie(test);
+		assertEquals(0,this.sut.getTestSeries().length);
+	}
+	
 }
