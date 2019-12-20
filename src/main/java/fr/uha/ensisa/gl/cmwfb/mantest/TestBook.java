@@ -40,8 +40,8 @@ public class TestBook {
 		return this.tests;
 	}
 	
-	public Test getTest(int testId) {
-		return this.tests.get(testId);
+	public Test getTest(long testId) {
+		return this.tests.get((int) testId);
 	}
 	
 	public int getTestId(Test test) {
@@ -53,7 +53,7 @@ public class TestBook {
 	}
 	
 	public void remove(Test test) {
-		this.tests.remove((int)test.getId());
+		this.tests.remove(test);
 	}
 	
 	public int getNumberOfTests() {
@@ -64,8 +64,8 @@ public class TestBook {
 		return this.testSeries;
 	}
 	
-	public TestSerie getTestSerie(int testSerieId) {
-		return this.testSeries.get(testSerieId);
+	public TestSerie getTestSerie(long testSerieId) {
+		return this.testSeries.get((int) testSerieId);
 	}
 	
 	public int getTestSerieId(TestSerie testSerie) {
