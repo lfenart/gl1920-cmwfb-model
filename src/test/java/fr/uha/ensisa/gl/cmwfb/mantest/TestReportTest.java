@@ -48,6 +48,7 @@ public class TestReportTest {
 		boolean result = true;
 		String commentaire = "";
 		assertNull(sut.getStepReport(1));
+		assertNull(sut.getStepReport(0));
 		sut.next(result,commentaire);
 		assertNotNull(sut.getStepReport(0));
 		assertEquals(sut.getStepReports().size(),test.getNumberOfSteps());
