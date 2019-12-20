@@ -42,6 +42,7 @@ public class TestReportTest {
 	}
 	
 	@Test
+
 	public void getStepReport() {
 		Step step = new Step();
 		test.addStep(step);
@@ -72,7 +73,6 @@ public class TestReportTest {
 		assertNull(sut.getNextStep());
 		test.addStep(s);
 		test.addStep(s2);
-		
 		assertEquals(s,sut.getNextStep());
 		sut.next(true, "");
 		assertEquals(s2,sut.getNextStep());
